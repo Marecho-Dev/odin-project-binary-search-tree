@@ -43,14 +43,26 @@ class Tree {
   getRoot() {
     return this.root;
   }
+
+  insert(data, node) {
+    if (node === null) {
+      return new Node(data);
+    }
+    if (data < node.data) {
+      node.left = this.insert(data, node.left);
+    }
+    if (data > node.data) {
+      node.right = this.insert(data, node.right);
+    }
+
+    return node;
+  }
 }
 
 const bst = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 console.log(bst);
 console.log("h");
 const root = bst.getRoot();
-console.log("calling root---------------");
-console.log(root);
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
     return;
@@ -63,5 +75,9 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
     prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
   }
 };
-console.log("------------------------------------------");
 prettyPrint(root);
+bst.insert(2, root);
+prettyPrint(bst.getRoot());
+
+bst.insert(200, root);
+prettyPrint(bst.getRoot());

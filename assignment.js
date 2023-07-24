@@ -57,6 +57,34 @@ class Tree {
 
     return node;
   }
+
+  delete(data, node) {
+    //base case
+    if (node === null) {
+      return node;
+    }
+    //traverse tree to the node that needs to be deleted
+    //need to return root so the next section on single child doesn't keep recursively deleteing itself
+    if (data < node.data) {
+      node.left = this.delete(data, node.left);
+      return node;
+    }
+    if (data > node.data) {
+      node.right = this.delete(data, node.right);
+      return node;
+    }
+
+    //checking for single child nodes, and leaf nodes
+    if (node.left == null && node.right == null) {
+      node = null;
+    } else if (node.left == null) {
+      node = node.right;
+    } else if (node.right == null) {
+      node = node.left;
+    }
+    return node;
+    //leaf node case (smallest node both children are null)
+  }
 }
 
 const bst = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -80,4 +108,9 @@ bst.insert(2, root);
 prettyPrint(bst.getRoot());
 
 bst.insert(200, root);
+prettyPrint(bst.getRoot());
+
+console.log("-----------------------------------------");
+
+bst.delete(2, root);
 prettyPrint(bst.getRoot());

@@ -82,6 +82,27 @@ class Tree {
     } else if (node.right == null) {
       node = node.left;
     }
+    //handles when both nodes are children. set parent and child node with childing being equal
+    //to the right node. This allows you to go left completely until you find null.
+    //when you find null, if the parent hasn't changed, set it to the right node
+    //else set succParent.right to the successor node
+    else {
+      let succParent = node;
+      let succ = node.right;
+      while (succ.left !== null) {
+        succParent = succ;
+        succ = succ.left;
+      }
+
+      if (succParent !== node) {
+        succParent.left = succ.right;
+      } else {
+        succParent.right = succ.right;
+      }
+
+      node.data = succ.data;
+      succ = null;
+    }
     return node;
     //leaf node case (smallest node both children are null)
   }
@@ -113,4 +134,7 @@ prettyPrint(bst.getRoot());
 console.log("-----------------------------------------");
 
 bst.delete(2, root);
+prettyPrint(bst.getRoot());
+
+bst.delete(4, root);
 prettyPrint(bst.getRoot());

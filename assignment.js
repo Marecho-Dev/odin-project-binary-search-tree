@@ -106,6 +106,22 @@ class Tree {
     return node;
     //leaf node case (smallest node both children are null)
   }
+
+  find(value, node) {
+    if (node === null || node.data === value) {
+      return node;
+    }
+    //traverse tree to the node that needs to be deleted
+    //need to return root so the next section on single child doesn't keep recursively deleteing itself
+    if (value < node.data) {
+      return (node.left = this.find(value, node.left));
+    }
+    if (value > node.data) {
+      return (node.right = this.find(value, node.right));
+    }
+
+    return node;
+  }
 }
 
 const bst = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -138,3 +154,4 @@ prettyPrint(bst.getRoot());
 
 bst.delete(4, root);
 prettyPrint(bst.getRoot());
+console.log(bst.find(5, root));

@@ -124,7 +124,7 @@ class Tree {
   }
   //visit all nodes at a depth or level before visitng the nodes at the deeper level
   //queue system is needed since you can't have multiple pointers.
-
+  //breadth-first
   levelOrder(arr = [], queue = [], node = this.root) {
     if (node == null) {
       return;
@@ -148,6 +148,31 @@ class Tree {
 
     return arr;
   }
+  //depth-first
+  //depth-first if we go in one direction, we visit all the nodes in that direction
+  //<left><root><right>
+  inOrder() {}
+  //<root><left><right>
+  //visit root
+  //visit left sub-tree
+  //visit right sub-tree
+  preOrder(arr = [], node = this.root) {
+    if (node == null) {
+      return;
+    }
+
+    arr.push(node.data);
+    if (root.left) this.preOrder(arr, node.left);
+    if (root.right) this.preOrder(arr, node.right);
+
+    return arr;
+  }
+  //<left><right><root>
+  postOrder() {}
+  height() {}
+  depth() {}
+  isBalanced() {}
+  rebalance() {}
 }
 
 const bst = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -182,3 +207,4 @@ bst.delete(4, root);
 prettyPrint(bst.getRoot());
 console.log(bst.find(5, root));
 console.log(bst.levelOrder());
+console.log(bst.preOrder());

@@ -122,6 +122,32 @@ class Tree {
 
     return node;
   }
+  //visit all nodes at a depth or level before visitng the nodes at the deeper level
+  //queue system is needed since you can't have multiple pointers.
+
+  levelOrder(arr = [], queue = [], node = this.root) {
+    if (node == null) {
+      return;
+    }
+    //sets up the array that will be return
+    arr.push(node.data);
+    //sets up queue FIFO with children of node passed in
+    queue.push(node.left);
+    queue.push(node.right);
+
+    while (queue.length) {
+      //sets level to the first node in the queue
+      //this will make it so on the next call, this will be the main node allowing
+      //for easy FIFO system
+      const level = queue[0];
+      //shift removes the first index as this one is already added to the arr.
+      //this allows for the recursive call to continue on with the next node at the current level
+      queue.shift();
+      this.levelOrder(arr, queue, level);
+    }
+
+    return arr;
+  }
 }
 
 const bst = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -155,3 +181,4 @@ prettyPrint(bst.getRoot());
 bst.delete(4, root);
 prettyPrint(bst.getRoot());
 console.log(bst.find(5, root));
+console.log(bst.levelOrder());

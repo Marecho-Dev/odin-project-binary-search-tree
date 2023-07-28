@@ -197,7 +197,16 @@ class Tree {
       return rightHeight + 1;
     }
   }
-  depth() {}
+  depth(node, root = this.root, depth = 0) {
+    if (root === null || node === null) return;
+    // if (node === root) return depth;
+    if (node === root) return `Depth: ${depth}`;
+    if (node.data < root.data) {
+      return this.depth(node, root.left, (depth += 1));
+    } else {
+      return this.depth(node, root.right, (depth += 1));
+    }
+  }
   isBalanced() {}
   rebalance() {}
 }

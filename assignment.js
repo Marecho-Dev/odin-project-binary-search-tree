@@ -186,7 +186,17 @@ class Tree {
 
     return arr;
   }
-  height() {}
+  height(node = this.root) {
+    if (node === null) return 0;
+    let leftHeight = this.height(node.left);
+    let rightHeight = this.height(node.right);
+
+    if (leftHeight > rightHeight) {
+      return leftHeight + 1;
+    } else {
+      return rightHeight + 1;
+    }
+  }
   depth() {}
   isBalanced() {}
   rebalance() {}
@@ -227,3 +237,6 @@ console.log(bst.levelOrder());
 console.log(bst.preOrder());
 console.log(bst.inOrder());
 console.log(bst.postOrder());
+const height = bst.height();
+console.log("----");
+console.log(height);

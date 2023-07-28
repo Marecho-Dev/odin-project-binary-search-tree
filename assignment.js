@@ -27,15 +27,9 @@ class Tree {
     if (data.length == 0) {
       return null;
     }
-    console.log("calling build tree on ");
-    console.log(data);
     const mid = parseInt((data.length - 1) / 2);
-    console.log("mid is ");
-    console.log(parseInt(mid));
     const treeNode = new Node(data[mid]);
-    console.log("calling build tree on left ");
     treeNode.left = this.buildTree(data.slice(0, mid));
-    console.log("calling build tree on right");
     treeNode.right = this.buildTree(data.slice(mid + 1, data.length));
     return treeNode;
   }
@@ -222,13 +216,13 @@ class Tree {
     return diff < 2 ? "true" : "false";
   }
 
-  rebalance(node = this.root) {
+  rebalance(root = this.root) {
     // created array of unbalanced tree?
     let arr = this.levelOrder([], [], root);
     //sort this array
     arr.sort((a, b) => a - b);
     // return a newly built tree and assign it as the new root
-    return (this.root = buildTree(arr));
+    return (this.root = this.buildTree(arr));
   }
 }
 
@@ -270,3 +264,5 @@ console.log(bst.postOrder());
 const height = bst.height();
 console.log("----");
 console.log(height);
+console.log(bst.isBalanced(root));
+bst.rebalance();

@@ -209,7 +209,19 @@ class Tree {
       return this.depth(node, root.right, (depth += 1));
     }
   }
-  isBalanced() {}
+
+  isBalanced(root = this.root) {
+    //pass the left node of root as the beginning node for height
+    //this will give the height of the left side
+    const lHeight = this.height(root.left);
+    //pass same info for right
+    const rHeight = this.height(root.right);
+    //checking difference with abs
+    const diff = Math.abs(lHeight - rHeight);
+    //if difference is greater than 2 return false. Balanced requires difference of 1 or 0
+    return diff < 2 ? "true" : "false";
+  }
+
   rebalance() {}
 }
 

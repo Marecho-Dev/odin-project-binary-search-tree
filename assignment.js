@@ -197,10 +197,12 @@ class Tree {
       return rightHeight + 1;
     }
   }
+  //start depth at 0
   depth(node, root = this.root, depth = 0) {
     if (root === null || node === null) return;
     // if (node === root) return depth;
     if (node === root) return `Depth: ${depth}`;
+    //go left or right dependending on node data passed in. add 1 to depth as each recursion is called
     if (node.data < root.data) {
       return this.depth(node, root.left, (depth += 1));
     } else {

@@ -210,19 +210,26 @@ class Tree {
     }
   }
 
-  isBalanced(root = this.root) {
+  isBalanced(node = this.root) {
     //pass the left node of root as the beginning node for height
     //this will give the height of the left side
-    const lHeight = this.height(root.left);
+    const lHeight = this.height(node.left);
     //pass same info for right
-    const rHeight = this.height(root.right);
+    const rHeight = this.height(node.right);
     //checking difference with abs
     const diff = Math.abs(lHeight - rHeight);
     //if difference is greater than 2 return false. Balanced requires difference of 1 or 0
     return diff < 2 ? "true" : "false";
   }
 
-  rebalance() {}
+  rebalance(node = this.root) {
+    // created array of unbalanced tree?
+    let arr = this.levelOrder([], [], root);
+    //sort this array
+    arr.sort((a, b) => a - b);
+    // return a newly built tree and assign it as the new root
+    return (this.root = buildTree(arr));
+  }
 }
 
 const bst = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);

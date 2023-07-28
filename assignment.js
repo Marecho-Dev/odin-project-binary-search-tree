@@ -151,7 +151,16 @@ class Tree {
   //depth-first
   //depth-first if we go in one direction, we visit all the nodes in that direction
   //<left><root><right>
-  inOrder() {}
+  inOrder(arr = [], node = this.root) {
+    if (node == null) {
+      return;
+    }
+    if (root.left) this.inOrder(arr, node.left);
+    arr.push(node.data);
+    if (root.right) this.inOrder(arr, node.right);
+
+    return arr;
+  }
   //<root><left><right>
   //visit root
   //visit left sub-tree
@@ -162,13 +171,21 @@ class Tree {
     }
 
     arr.push(node.data);
-    if (root.left) this.preOrder(arr, node.left);
-    if (root.right) this.preOrder(arr, node.right);
+    if (node.left) this.preOrder(arr, node.left);
+    if (node.right) this.preOrder(arr, node.right);
 
     return arr;
   }
   //<left><right><root>
-  postOrder() {}
+  postOrder(arr = [], node = this.node) {
+    if (node == null) return;
+
+    if (node.left) this.postOrder(node.left);
+    if (node.right) this.postOrder(node.right);
+    arr.push(node.data);
+
+    return arr;
+  }
   height() {}
   depth() {}
   isBalanced() {}
@@ -208,3 +225,5 @@ prettyPrint(bst.getRoot());
 console.log(bst.find(5, root));
 console.log(bst.levelOrder());
 console.log(bst.preOrder());
+console.log(bst.inOrder());
+console.log(bst.postOrder());
